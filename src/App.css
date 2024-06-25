@@ -5,7 +5,7 @@
 
 body,
 label {
-    cursor: url('../public/cursors/NormalSelect.cur'), default;
+    cursor: url('/cursors/NormalSelect.cur'), default;
 }
 
 link,
@@ -14,12 +14,12 @@ button,
 select,
 option,
 option:hover {
-    cursor: url('../public/cursors/LinkSelect.cur'), pointer;
+    cursor: url('/cursors/LinkSelect.cur'), pointer;
 }
 
 input,
 textarea {
-    cursor: url('../public/cursors/HandwritingText.cur'), text;
+    cursor: url('/cursors/HandwritingText.cur'), text;
 }
 
 textarea {
