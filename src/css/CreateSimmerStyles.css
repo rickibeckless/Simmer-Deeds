@@ -1,0 +1,220 @@
+#create-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 100vh;
+    padding: 5vh;
+
+    background-image: url('../assets/theSimsBackground.png');
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    box-shadow: inset 0 0 0 50vw #00000040;
+}
+
+#new-simmer-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    border-radius: 15px;
+
+    max-width: min-content;
+
+    color: #0b4dae;
+    font-weight: 500;
+
+    background-color: #ffffff;
+    overflow: hidden;
+}
+
+#new-simmer-form > * {
+    margin: 0 4vw;
+}
+
+/* #create-simmer-search-results {
+    border: 2px solid black;
+    margin: 2%;
+    padding: 2%;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+    width: 90vw;
+
+} */
+
+/* #c-s-search-results-card {
+    border: 2px dashed red;
+    margin: 2%;
+    padding: 2%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    width: 20vw;
+    word-wrap: break-word;
+} */
+
+#create-simmer-search-results {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15vw, 1fr));
+
+    width: 100%;
+}
+
+#create-simmer-search-results #simmer-card {
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+
+    cursor: url('../public/cursors/LinkSelect.cur'), pointer;
+}
+
+#create-simmer-search-results #simmer-card h3 {
+    text-align: center;
+}
+
+#create-simmer-search-results #simmer-card .simmer-card-img {
+    width: 8vw;
+    height: 8vw;
+}
+
+#n-s-form-header {
+    font-variant: small-caps;
+    font-size: 3rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.n-s-form-additional {
+    font-size: .95rem;
+    color: #324d75;
+    font-weight: 400;
+    text-align: center;
+}
+
+.n-s-form-group label {
+    font-size: 1.2rem;
+    font-variant: small-caps;
+    font-weight: 500;
+}
+
+/* form group styles */
+
+#n-s-form-intro {
+    margin-bottom: 1rem;
+}
+
+#n-s-form-groups-holder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1vh;
+}
+
+.n-s-form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 1vw;
+    gap: 1vh;
+}
+
+.n-s-form-group:hover {
+    background-color: #bbff904f;
+    border-radius: 20px;
+}
+
+#n-s-form-cancel-btn,
+#n-s-form-outro {
+    margin: 0;
+}
+
+#n-s-form-outro {
+    background-color: #c1c9d9;
+    width: 100%;
+
+    margin-top: 4vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.n-s-form-content {
+    outline: none;
+    border: 1px solid #0b4dae;
+    border-radius: 20px;
+    box-shadow: 0px 4px 8px -2px #000000cc;
+
+    width: 30vw;
+
+    padding: 2%;
+}
+
+.n-s-form-content:focus {
+    border: 2px solid #324d75;
+}
+
+#n-s-form-search-simmer-holder {
+    display: flex;
+}
+
+.form-input-holder,
+.form-img-holder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1vh;
+}
+
+/* form button styles */
+
+.n-s-form-btn {
+    background: -moz-linear-gradient(0deg, hsla(0, 0%, 70%, 1) 0%, hsla(0, 0%, 88%, 1) 32%, hsla(0, 0%, 100%, 1) 63%);
+    background: -webkit-linear-gradient(0deg, hsla(0, 0%, 70%, 1) 0%, hsla(0, 0%, 88%, 1) 32%, hsla(0, 0%, 100%, 1) 63%);
+    background: linear-gradient(0deg, hsla(0, 0%, 70%, 1) 0%, hsla(0, 0%, 88%, 1) 32%, hsla(0, 0%, 100%, 1) 63%);
+
+    border: none;
+    border-radius: 20px;
+
+    text-align: center;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #0b4dae;
+}
+
+.n-s-form-btn:hover {
+    color: #0cb812;
+}
+
+#n-s-form-outro .n-s-form-btn {
+    margin: 4%;
+    padding: 2%;
+}
+
+#n-s-form-cancel-btn {
+    margin-left: auto;
+    margin-top: 2vh;
+    margin-right: 2vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 1.1rem;
+
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+}

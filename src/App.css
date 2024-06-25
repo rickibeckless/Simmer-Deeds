@@ -1,0 +1,99 @@
+@import url('./css/HomeStyles.css');
+@import url('./css/CreateSimmerStyles.css');
+
+/* CURSOR STYLES */
+
+body,
+label {
+    cursor: url('../public/cursors/NormalSelect.cur'), default;
+}
+
+link,
+a,
+button,
+select,
+option,
+option:hover {
+    cursor: url('../public/cursors/LinkSelect.cur'), pointer;
+}
+
+input,
+textarea {
+    cursor: url('../public/cursors/HandwritingText.cur'), text;
+}
+
+textarea {
+    resize: vertical;
+    max-height: 20vh;
+    min-height: 8vh;
+}
+
+/* BACKGROUND STYLES */
+
+html {
+    background-image: url('./assets/theSimsBanner.jpg');
+    background-attachment: fixed;
+    box-shadow: inset 0 0 0 50vw #8f8f8f40;
+}
+
+#main-navbar,
+#main-footer {
+    background-color: #9fbf8ceb;
+
+    margin: 2vh;
+    padding: 1%;
+    
+    border: 3px solid #153e92;
+    border-radius: 15px;
+}
+
+#main-navbar a,
+#main-footer a {
+    color: #153e92;
+    text-decoration: none;
+    font-variant: small-caps
+}
+
+#main-navbar a:hover,
+#main-footer a:hover {
+    color: #038c08;
+}
+
+/* #main-navbar-title {
+    font-family: simsFont;
+} */
+
+#main-navbar {
+    position: sticky;
+    top: 0;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+
+    font-size: 1.35rem;
+    color: #153e92;
+}
+
+#main-navbar-title {
+    font-size: 2rem;
+}
+
+#main-body {
+    background-color: #ffffff;
+}
+
+#main-footer #footer-cr-statement {
+    text-align: end;
+}
+
+/* FONT STYLES */
+
+h1, h2, h3, h4, h5, h6,
+#simmer-card-header a,
+#main-navbar a,
+#main-footer p, #main-footer a {
+    font-family: simsFont, 'Poppins', Arial, Helvetica, sans-serif;
+}
