@@ -4,11 +4,13 @@ import { supabase, youtubeKey } from '../App';
 import sims_plumbob from "../assets/sims_plumbob.png";
 import sims_plumbob_avatar from "../assets/sims_plumbob_avatar.png";
 import { EditSimmer } from "../pages/EditSimmer";
-import { debounce } from 'lodash';
+import { debounce, update } from 'lodash';
 
 export default function Simmer() {
-    const [simmer, setSimmer] = useState([]);
     const { id } = useParams();
+    const [simmer, setSimmer] = useState({});
+    const [latestVideos, setLatestVideos] = useState([]);
+    const [vidUpToDate, setVidUpToDate] = useState(false);
 
     const fetchSimmer = async () => {
         try {
@@ -28,17 +30,52 @@ export default function Simmer() {
         };
     };
 
-    // fetch youtube information here.
-    // instead of using the yt search api, use yt channel api to get channel info.
-
     useEffect(() => {
         fetchSimmer();
     }, []);
 
+    useEffect(() => {
+        if (simmer?.channel_id && !simmer?.full_description) {
+            const fetchYoutube = async () => {
+                try {
+                    const response = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=snippet&id=${simmer.channel_id}&key=${youtubeKey}`);
+                    const data = await response.json();
+                    const simmerInfo = data.items[0].snippet;
+                    await updateSimmer(simmerInfo.description);
+
+                    console.log("Ran");
+                } catch (error) {
+                    console.log('Error fetching youtube:', error.message);
+                };
+            };
+
+            fetchYoutube();
+        }
+    }, [simmer]);
+
+    const updateSimmer = async (description) => {
+        try {
+            const { data, error } = await supabase
+                .from('simmers')
+                .update({
+                    full_description: description
+                })
+                .eq('id', id);
+
+            if (error) {
+                throw error;
+            };
+
+            setSimmer(prev => ({ ...prev, full_description: description }));
+        } catch (error) {
+            console.log('Error updating simmer:', error.message);
+        };
+    };
+
     return (
         <>
             <h1>{simmer.simmer}</h1>
-            <p>Simmer page.</p>
+            <p>{simmer.full_description}</p>
         </>
     );
 };
