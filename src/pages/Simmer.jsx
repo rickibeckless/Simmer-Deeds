@@ -26,7 +26,7 @@ export default function Simmer() {
 
             setSimmer(data);
         } catch (error) {
-            console.log('Error fetching simmer:', error.message);
+            console.error('Error fetching simmer:', error.message);
         };
     };
 
@@ -45,7 +45,7 @@ export default function Simmer() {
 
                     console.log("Ran");
                 } catch (error) {
-                    console.log('Error fetching youtube:', error.message);
+                    console.error('Error fetching youtube:', error.message);
                 };
             };
 
@@ -68,14 +68,60 @@ export default function Simmer() {
 
             setSimmer(prev => ({ ...prev, full_description: description }));
         } catch (error) {
-            console.log('Error updating simmer:', error.message);
+            console.error('Error updating simmer:', error.message);
+        };
+    };
+
+    const fetchLatestVideos = async () => {
+        try {
+            const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${simmer.channel_id}&maxResults=5&order=date&type=video&key=${youtubeKey}`);
+            const data = await response.json();
+            const videos = data.items.map(item => ({
+                id: item.id.videoId,
+                title: item.snippet.title,
+                description: item.snippet.description,
+                thumbnail: item.snippet.thumbnails.default.url,
+                publishedAt: item.snippet.publishedAt,
+            }));
+
+            return videos;
+        } catch (error) {
+            console.error('Error fetching latest videos:', error.message);
+            return [];
+        };
+    };
+
+    useEffect(() => {
+        if (simmer.channel_id) {
+            fetchAndCompareVideos();
+        };
+    }, [simmer]);
+
+    const fetchAndCompareVideos = async () => {
+        const newVideos = await fetchLatestVideos();
+
+        if (JSON.stringify(newVideos) !== JSON.stringify(latestVideos)) {
+            setLatestVideos(newVideos);
+            setVidUpToDate(true);
+        } else {
+            setVidUpToDate(false);
         };
     };
 
     return (
-        <>
+        <main id="simmer-page-body">
             <h1>{simmer.simmer}</h1>
             <p>{simmer.full_description}</p>
-        </>
+
+            <div className="video-grid">
+                {latestVideos.map(video => (
+                    <div key={video.id} className="video-card">
+                        <img src={video.thumbnail} alt={video.title} />
+                        <h3>{video.title}</h3>
+                        <p>{video.description}</p>
+                    </div>
+                ))}
+            </div>
+        </main>
     );
 };

@@ -52,8 +52,8 @@ function App() {
             <footer id="main-footer">
                 <p id="footer-cr-statement">
                     Copyright &copy; 2024&nbsp;
-                    <a id="footer-cr-link" href="https://github.com/rickibeckless" target="_blank" rel="nofollow noreferrer" title="Ricki Beckless GitHub">Ricki Beckless</a>
-                    . All rights reserved.
+                    <a id="footer-cr-link" href="https://github.com/rickibeckless" target="_blank" rel="nofollow noreferrer" title="GitHub: Ricki Beckless">Ricki Beckless</a>
+                    . All Rights Reserved.
                 </p>
             </footer>
         </>

@@ -54,7 +54,7 @@ export function NewSimmer() {
             console.log('New simmer created');
             navigate('/');
         } catch (error) {
-            console.log('Error creating simmer:', error.message);
+            console.error('Error creating simmer:', error.message);
         };
     };
 

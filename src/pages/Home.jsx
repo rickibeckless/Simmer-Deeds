@@ -24,7 +24,7 @@ export function Home() {
                 <h1>Landing</h1>
                 <div id="home-search">
                     <h2>Search Bar</h2>
-                    <input type="search" id="search" placeholder="Search for simmers" onChange={handleSearch} />
+                    <input type="search" className="simmer-search-bar n-s-form-content" id="home-search-bar" placeholder="Search for simmers" onChange={handleSearch} />
                 </div>
             </section>
 

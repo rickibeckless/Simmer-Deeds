@@ -8,6 +8,7 @@ import { debounce } from 'lodash';
 
 export default function SimmerCard({ cardDataType, searchResult }) {
     const [simmerName, setSimmerName] = useState([]);
+    const [cardHovered, setCardHovered] = useState(false);
 
     const fetchSimmer = useCallback(async () => {
         try {
@@ -34,7 +35,7 @@ export default function SimmerCard({ cardDataType, searchResult }) {
 
             setSimmerName(sortedData);
         } catch (error) {
-            console.log('Error fetching simmer:', error.message);
+            console.error('Error fetching simmer:', error.message);
         };
     }, [cardDataType, searchResult]);
 
@@ -59,7 +60,7 @@ export default function SimmerCard({ cardDataType, searchResult }) {
             ));
 
         } catch (error) {
-            console.log('Error giving plumbob:', error.message);
+            console.error('Error giving plumbob:', error.message);
         };
     };
 
