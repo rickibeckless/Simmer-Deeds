@@ -72,6 +72,7 @@ export default function Simmer() {
         };
     };
 
+/*
     const fetchLatestVideos = async () => {
         try {
             const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${simmer.channel_id}&maxResults=5&order=date&type=video&key=${youtubeKey}`);
@@ -106,14 +107,30 @@ export default function Simmer() {
         } else {
             setVidUpToDate(false);
         };
-    };
+    }; 
+*/
 
     return (
         <main id="simmer-page-body">
+            {simmer?.image_type ? (
+                <div className="simmer-card-img-holder">
+                    {simmer?.image_type === "file" && (
+                        <img src={`data:image/png;base64,${simmer?.image_file}`} alt={`${simmer.simmerName} image`} className="simmer-card-img" />
+                    )}
+                    {simmer?.image_type === "url" && (
+                        <img src={simmer?.image_url} alt={`${simmer.simmerName} image`} className="simmer-card-img" />
+                    )}
+                </div>
+            ) : 
+                <div className="simmer-card-img-holder">
+                    <img src={sims_plumbob_avatar} alt={`${simmer.simmerName} image`} className="simmer-card-img" />
+                </div>
+            }
+
             <h1>{simmer.simmer}</h1>
             <p>{simmer.full_description}</p>
 
-            <div className="video-grid">
+            {/* <div className="video-grid">
                 {latestVideos.map(video => (
                     <div key={video.id} className="video-card">
                         <img src={video.thumbnail} alt={video.title} />
@@ -121,7 +138,7 @@ export default function Simmer() {
                         <p>{video.description}</p>
                     </div>
                 ))}
-            </div>
+            </div> */}
         </main>
     );
 };

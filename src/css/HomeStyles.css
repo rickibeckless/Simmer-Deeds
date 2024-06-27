@@ -1,13 +1,46 @@
 #home-landing {
-    height: 70dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
     background-color: #b0f486;
+
+    height: 70dvh;    
 }
 
 /* SEARCH BAR STYLES */
 
-.simmer-search-bar {
-    
+#home-search {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: 5vh;
+}
+
+#home-search h2 {
+    font-size: 3rem;
+}
+
+#home-search-bar {
+    width: 65vw;
+    font-size: 1.5rem;
+}
+
+#h-s-add-link {
+    font-style: italic;
+}
+
+#h-s-add-link a {
+    text-decoration: none;
+    color: #153e92;
+    font-style: normal;
+}
+
+#h-s-add-link a:hover {
+    color: #1e6db3;
 }
 
 /* SECTION STYLES */
@@ -31,6 +64,21 @@
     margin: 2%;
     padding: 2%;
     row-gap: 3rem;
+}
+
+/* SORT STYLES */
+
+#h-s-sort-holder {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2vw;
+}
+
+#h-s-sort-holder select {
+    padding: .5vw;
+    border-radius: 20px;
 }
 
 /* SIMMER CARD STYLES */

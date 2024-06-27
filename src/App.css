@@ -96,6 +96,7 @@ html {
 h1, h2, h3, h4, h5, h6,
 #simmer-card-header a,
 #main-navbar a,
-#main-footer p, #main-footer a {
+#main-footer p, #main-footer a,
+#h-s-add-link a {
     font-family: simsFont, 'Poppins', Arial, Helvetica, sans-serif;
 }

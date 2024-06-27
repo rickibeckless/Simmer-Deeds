@@ -9,6 +9,7 @@ export function Home() {
 
     let [search, setSearch] = useState("");
     let [sortedFull, setSortedFull] = useState("az");
+    const [simmer, setSimmer] = useState("");
 
     const handleSearch = (e) => {
         setSearch(e.target.value);
@@ -18,19 +19,49 @@ export function Home() {
         setSortedFull(e.target.value);
     };
 
+    const fetchSimmer = async () => {
+        try {
+            const { data, error } = await supabase
+                .from('simmers')
+                .select('*');
+
+            if (error) {
+                throw new Error(error.message);
+            };
+
+            data.forEach((simmer, index) => {
+                setTimeout(() => {
+                    setSimmer(simmer.simmer);
+                }, index * 2000);
+            });
+
+            setSimmer("Search for a Simmer!");
+
+        } catch (error) {
+            console.error("Error fetching simmer: ", error.message);
+        };
+    };
+
+    useEffect(() => {
+        fetchSimmer();
+    }, []);
+
     return (
         <main id="home-body">
             <section id="home-landing">
-                <h1>Landing</h1>
                 <div id="home-search">
-                    <h2>Search Bar</h2>
-                    <input type="search" className="simmer-search-bar n-s-form-content" id="home-search-bar" placeholder="Search for simmers" onChange={handleSearch} />
+                    <h3>Looking for someone already here?</h3>
+                    <h2>Search For a Simmer!</h2>
+                    <input type="search" className="simmer-search-bar n-s-form-content" id="home-search-bar" placeholder={simmer} onChange={handleSearch} />
+                    <h4 id="h-s-add-link">And if they're not here, don't worry, you can just 
+                        <Link to="/new-simmer"> add them</Link>!
+                    </h4>
                 </div>
             </section>
 
             <section id="home-content">
                 <div id="home-brief">
-                    <p className="n-s-form-additional">Search Results or recently added</p>
+                    <p className="n-s-form-additional">Search Results or Recently Added</p>
 
                     <section className="home-simmer-card-holder" id="home-brief-simmer-card-holder">
                         {(search.length > 0) ? 
@@ -41,9 +72,9 @@ export function Home() {
                 </div>
 
                 <div id="home-simmers">
-                    <aside>
-                        <p>Sort</p>
-                        <select id="sort-full" value={sortedFull} onChange={handleSortChange} className="n-s-form-additional">
+                    <aside id="h-s-sort-holder">
+                        <p>Sort Simmers:</p>
+                        <select id="sort-full" title="sort simmers" value={sortedFull} onChange={handleSortChange} className="n-s-form-additional">
                             <option value="az">a-z</option>
                             <option value="plumbobs">plumbobs</option>
                         </select>
