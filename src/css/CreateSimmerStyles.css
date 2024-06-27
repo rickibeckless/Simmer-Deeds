@@ -219,3 +219,9 @@
     height: 2rem;
     border-radius: 50%;
 }
+
+/* EDIT SIMMER STYLES */
+
+#e-s-form-delete-btn:hover {
+    color: #ff0000;
+}

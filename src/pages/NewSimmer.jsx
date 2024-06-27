@@ -175,7 +175,7 @@ export function NewSimmer() {
                                     {searchResults.map(result => (
                                         <div id="simmer-card" key={result.channelId} onClick={() => handleResultClick(result)}>
                                             <img className="simmer-card-img" src={result.thumbnail} alt={result.title} />
-                                            <h3><a className="simmer-card-link" href={result.url}>{result.title}</a></h3>
+                                            <h3 className="simmer-card-link">{result.title}</h3>
                                         </div>
                                     ))}
                                 </div>
