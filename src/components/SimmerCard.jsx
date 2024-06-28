@@ -93,58 +93,67 @@ export default function SimmerCard({ cardDataType, searchResult }) {
 
     return (
         <>
-            {simmerName.map(simmer => (
-                <div id="simmer-card" key={simmer.id}>
+            {simmerName.map(simmer => {
+                const truncateDescription = (text, maxLength = 200) => {
+                    return text.length > maxLength ? `${text.slice(0, maxLength)}...` : text;
+                };
+                
+                const first200CharsDescription = truncateDescription(simmer.description);
+                const first200CharsCustomDescription = truncateDescription(simmer.custom_description);
+                
+                return (
+                    <div id="simmer-card" key={simmer.id}>
 
-                    {simmer?.image_type ? (
-                        <div className="simmer-card-img-holder">
-                            {simmer?.image_type === "file" && (
-                                <img src={`data:image/png;base64,${simmer?.image_file}`} alt={`${simmer.simmerName} image`} className="simmer-card-img" />
-                            )}
-                            {simmer?.image_type === "url" && (
-                                <img src={simmer?.image_url} alt={`${simmer.simmerName} image`} className="simmer-card-img" />
-                            )}
-                        </div>
-                    ) : 
-                        <div className="simmer-card-img-holder">
-                            <img src={sims_plumbob_avatar} alt={`${simmer.simmerName} image`} className="simmer-card-img" />
-                        </div>
-                    }
-
-                    <div id="simmer-card-content">
-                        <h2 id="simmer-card-header"><Link to={`/${simmer.id}/${simmer.simmer}`} className="simmer-card-link">{simmer.simmer}</Link></h2>
-                        <p id="simmer-card-channel">see more {simmer.simmer} on
-                            <a href={simmer.url} target="_blank" rel="noopener noreferrer" id="simmer-card-url" className="simmer-card-link" title={simmer.url}> {getWebsiteName(simmer.url)}</a>
-                        </p>
-
-                        <div id="s-c-description-holder">
-                            <h4>
-                                <span id="s-c-description-name">{simmer.simmer}</span> says: 
-                            </h4>
-                            <p id="s-c-description">{simmer.description}</p>
-                        </div>
-
-                        {simmer.custom_description && (
-                            <div id="s-c-custom-description-holder">
-                                <p id="s-c-custom-description-name">a few extra words about {simmer.simmer}: </p>
-                                <p id="s-c-custom-description">{simmer.custom_description}</p>
+                        {simmer?.image_type ? (
+                            <div className="simmer-card-img-holder">
+                                {simmer?.image_type === "file" && (
+                                    <img src={`data:image/png;base64,${simmer?.image_file}`} title={`${simmer.simmer} image`} alt={`${simmer.simmer} image`} className="simmer-card-img" />
+                                )}
+                                {simmer?.image_type === "url" && (
+                                    <img src={simmer?.image_url} title={`${simmer.simmer} image`} alt={`${simmer.simmer} image`} className="simmer-card-img" />
+                                )}
                             </div>
-                        )}
-                    </div>
+                        ) : 
+                            <div className="simmer-card-img-holder">
+                                <img src={sims_plumbob_avatar} title={`${simmer.simmer} image`} alt={`${simmer.simmer} image`} className="simmer-card-img" />
+                            </div>
+                        }
 
-                    <div id="simmer-card-plumbobs">
-                        <p id="s-c-plumbob-description">Like this Simmer? Give them a Plumbob!</p>
-                        <p id="s-c-plumbob-holder">
-                            <span id="s-c-plumbob-count">{simmer.plumbobs}</span>
-                            <button id="plumbob-btn" onClick={() => givePlumbob(simmer.id)}>
-                                <img src={sims_plumbob} alt="the sims plumbob" id="plumbob-img" />
-                            </button>
-                        </p>
-                    </div>
+                        <div id="simmer-card-content">
+                            <h2 id="simmer-card-header"><Link to={`/${simmer.id}/${simmer.simmer}`} className="simmer-card-link">{simmer.simmer}</Link></h2>
+                            <p id="simmer-card-channel">see more {simmer.simmer} on
+                                <a href={simmer.url} target="_blank" rel="noopener noreferrer" id="simmer-card-url" className="simmer-card-link" title={simmer.url}> {getWebsiteName(simmer.url)}</a>
+                            </p>
 
-                    <Link to={`${simmer.id}/${simmer.simmer}/edit-simmer`} id="simmer-card-edit-link">Edit</Link>
-                </div>
-            ))}
+                            <div id="s-c-description-holder">
+                                <h4>
+                                    <span id="s-c-description-name">{simmer.simmer}</span> says: 
+                                </h4>
+                                <p id="s-c-description">{first200CharsDescription}</p>
+                            </div>
+
+                            {simmer.custom_description && (
+                                <div id="s-c-custom-description-holder">
+                                    <p id="s-c-custom-description-name">a few extra words about {simmer.simmer}: </p>
+                                    <p id="s-c-custom-description">{first200CharsCustomDescription}</p>
+                                </div>
+                            )}
+                        </div>
+
+                        <div id="simmer-card-plumbobs">
+                            <p id="s-c-plumbob-description">Like this Simmer? Give them a Plumbob!</p>
+                            <p id="s-c-plumbob-holder">
+                                <span id="s-c-plumbob-count">{simmer.plumbobs}</span>
+                                <button id="plumbob-btn" onClick={() => givePlumbob(simmer.id)}>
+                                    <img src={sims_plumbob} alt="the sims plumbob" id="plumbob-img" />
+                                </button>
+                            </p>
+                        </div>
+
+                        <Link to={`${simmer.id}/${simmer.simmer}/edit-simmer`} id="simmer-card-edit-link">Edit</Link>
+                    </div>
+                )
+            })}
         </>
     );
 };

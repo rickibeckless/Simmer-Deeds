@@ -1,3 +1,7 @@
 #simmer-page-body {
     min-height: 100vh;
 }
+
+#s-p-description {
+    white-space: pre-wrap;
+}

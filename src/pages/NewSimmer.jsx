@@ -19,7 +19,10 @@ export function NewSimmer() {
 
     const [simmerDescription, setSimmerDescription] = useState('');
     const [simmerCustomDescription, setSimmerCustomDescription] = useState('');
+    const [fullSimmerDescription, setFullSimmerDescription] = useState('');
     let [searchResults, setSearchResults] = useState([]);
+
+    const [isCustomSimmer, setIsCustomSimmer] = useState(true);
 
     const navigate = useNavigate();
 
@@ -32,6 +35,11 @@ export function NewSimmer() {
                 fileData = await convertFileToBase64(file);
             }
 
+            let finalFullDescription = fullSimmerDescription;
+            if (isCustomSimmer) {
+                finalFullDescription = simmerDescription;
+            };
+
             const { data, error } = await supabase
                 .from('simmers')
                 .insert([
@@ -40,6 +48,7 @@ export function NewSimmer() {
                         url: simmerUrl,
                         description: simmerDescription,
                         custom_description: simmerCustomDescription,
+                        full_description: finalFullDescription,
                         image_type: image_type,
                         image_url: url,
                         image_file: fileData,
@@ -107,6 +116,7 @@ export function NewSimmer() {
         setUrl(result.thumbnail);
         setSimmerID(result.channelId);
         setMedia('url');
+        setIsCustomSimmer(true);
 
         console.log(result);
         console.log("Simmer Name: ", simmerName);

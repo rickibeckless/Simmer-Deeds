@@ -128,7 +128,7 @@ export default function Simmer() {
             }
 
             <h1>{simmer.simmer}</h1>
-            <p>{simmer.full_description}</p>
+            <div id="s-p-description">{simmer.full_description}</div>
 
             {/* <div className="video-grid">
                 {latestVideos.map(video => (
@@ -139,6 +139,8 @@ export default function Simmer() {
                     </div>
                 ))}
             </div> */}
+
+            <Link to={`/${id}/${simmer.simmer}/edit-simmer`} id="simmer-card-edit-link">Edit</Link>
         </main>
     );
 };
