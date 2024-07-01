@@ -42,3 +42,27 @@
     align-items: center;
     gap: 2vw;
 }
+
+/* RESPONSIVE STYLES */
+
+@media screen and (max-width: 800px) {
+    #s-p-info-card {
+        width: 90%;
+    }
+
+    .s-p-img {
+        width: 30vw;
+        height: 30vw;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    #s-p-info-card {
+        width: 100%;
+    }
+
+    .s-p-img {
+        width: 40vw;
+        height: 40vw;
+    }
+}
