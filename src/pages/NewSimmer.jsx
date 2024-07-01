@@ -1,10 +1,9 @@
 // dependencies
 import { Link, useNavigate } from 'react-router-dom';
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState } from 'react';
 import { supabase, youtubeKey } from '../App';
-import sims_plumbob from "../assets/sims_plumbob.png";
-import sims_background from "../assets/theSimsBackground.png";
-import { debounce } from 'lodash';
+
+import PageTitle from '../components/PageTitle';
 
 export function NewSimmer() {
 
@@ -145,6 +144,7 @@ export function NewSimmer() {
 
     return (
         <main id="create-body">
+            <PageTitle title="New Simmer | Simmer Deeds" />
             <form id="new-simmer-form" onSubmit={handleSubmit}>
                 <Link to="/" className="n-s-form-btn" id="n-s-form-cancel-btn">X</Link>
 

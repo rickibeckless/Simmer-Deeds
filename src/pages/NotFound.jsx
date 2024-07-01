@@ -1,7 +1,6 @@
-import { Link, Routes, Route, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { supabase } from '../App';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import SimmerCard from '../components/SimmerCard';
+import PageTitle from '../components/PageTitle';
 
 export function NotFound() {
 
@@ -13,6 +12,7 @@ export function NotFound() {
 
     return (
         <main id="not-found-body">
+            <PageTitle title={`404! | Simmer Deeds`} />
             <section className="n-f-statement-holder">
                 <h1>404</h1>
                 <h2>Sorry! There doesn't seem to be anything here.</h2>

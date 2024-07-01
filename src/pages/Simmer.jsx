@@ -1,11 +1,11 @@
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useState, useEffect} from 'react';
 import { supabase, youtubeKey } from '../App';
 import { getWebsiteName } from '../components/SimmerCard';
 import sims_plumbob from "../assets/sims_plumbob.png";
 import sims_plumbob_avatar from "../assets/sims_plumbob_avatar.png";
-import { EditSimmer } from "../pages/EditSimmer";
-import { debounce, update } from 'lodash';
+
+import PageTitle from '../components/PageTitle';
 
 export default function Simmer() {
     const { simmerName } = useParams();
@@ -95,6 +95,7 @@ export default function Simmer() {
 
     return (
         <main id="simmer-page-body">
+            <PageTitle title={`${simmer.simmer} | Simmer Deeds`} />
             <section id="s-p-info-card">
                 <div className="s-p-header">
                     {simmer?.image_type ? (

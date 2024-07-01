@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 
 // components
 import SimmerCard from '../components/SimmerCard';
+import PageTitle from '../components/PageTitle';
 
 export function Home() {
 
@@ -48,6 +49,7 @@ export function Home() {
 
     return (
         <main id="home-body">
+            <PageTitle title="Home | Simmer Deeds" />
             <section id="home-landing">
                 <div id="home-search">
                     <h3>Looking for someone already here?</h3>

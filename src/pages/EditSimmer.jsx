@@ -2,7 +2,7 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { supabase } from '../App';
 import { useState, useEffect } from 'react';
-import { set } from 'lodash';
+import PageTitle from '../components/PageTitle';
 
 export function EditSimmer() {
 
@@ -128,6 +128,7 @@ export function EditSimmer() {
 
     return (
         <main id="create-body">
+            <PageTitle title={`Edit: ${simmer.simmer} | Simmer Deeds`} />
             <h1>Edit Simmer</h1>
             <h3>{simmer.simmer}</h3>
 
