@@ -43,8 +43,8 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/new-simmer" element={<NewSimmer />} />
-                    <Route path="/:id/:simmerName" element={<Simmer />} />
-                    <Route path="/:id/:simmerName/edit-simmer" element={<EditSimmer />} />
+                    <Route path="/:simmerName" element={<Simmer />} />
+                    <Route path="/:simmerName/edit-simmer" element={<EditSimmer />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </div>

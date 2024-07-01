@@ -1,7 +1,44 @@
 #simmer-page-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
     min-height: 100vh;
+
+    padding: 5vh;
 }
 
-#s-p-description {
-    white-space: pre-wrap;
+.s-p-header {
+    display: flex;
+    flex-direction: column;
+
+    gap: 2vh;
+}
+
+.s-p-img {
+    width: 20vw;
+    height: 20vw;
+    border-radius: 50%;
+}
+
+#s-p-info-card {
+    display: flex;
+    flex-direction: column;
+
+    gap: 2vh;
+
+    width: 80%;
+}
+
+.s-p-description {
+    white-space: pre-wrap; /* youtube doesn't have html tags for the about section of a youtubers page, so instead I preserve the white-spaces */
+}
+
+#s-p-plumbobs {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 2vw;
 }

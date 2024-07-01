@@ -1,13 +1,14 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect} from 'react';
 import { supabase, youtubeKey } from '../App';
+import { getWebsiteName } from '../components/SimmerCard';
 import sims_plumbob from "../assets/sims_plumbob.png";
 import sims_plumbob_avatar from "../assets/sims_plumbob_avatar.png";
 import { EditSimmer } from "../pages/EditSimmer";
 import { debounce, update } from 'lodash';
 
 export default function Simmer() {
-    const { id } = useParams();
+    const { simmerName } = useParams();
     const [simmer, setSimmer] = useState({});
     const [latestVideos, setLatestVideos] = useState([]);
     const [vidUpToDate, setVidUpToDate] = useState(false);
@@ -17,7 +18,7 @@ export default function Simmer() {
             const { data, error } = await supabase
                 .from('simmers')
                 .select('*')
-                .eq('id', id)
+                .eq('simmer', simmerName)
                 .single();
 
             if (error) {
@@ -42,8 +43,6 @@ export default function Simmer() {
                     const data = await response.json();
                     const simmerInfo = data.items[0].snippet;
                     await updateSimmer(simmerInfo.description);
-
-                    console.log("Ran");
                 } catch (error) {
                     console.error('Error fetching youtube:', error.message);
                 };
@@ -60,7 +59,7 @@ export default function Simmer() {
                 .update({
                     full_description: description
                 })
-                .eq('id', id);
+                .eq('simmer', simmerName);
 
             if (error) {
                 throw error;
@@ -72,75 +71,85 @@ export default function Simmer() {
         };
     };
 
-/*
-    const fetchLatestVideos = async () => {
+    const givePlumbob = async (id) => {
         try {
-            const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${simmer.channel_id}&maxResults=5&order=date&type=video&key=${youtubeKey}`);
-            const data = await response.json();
-            const videos = data.items.map(item => ({
-                id: item.id.videoId,
-                title: item.snippet.title,
-                description: item.snippet.description,
-                thumbnail: item.snippet.thumbnails.default.url,
-                publishedAt: item.snippet.publishedAt,
+            const updatePlumbob = simmer.plumbobs + 1;
+            const { data, error } = await supabase
+                .from('simmers')
+                .update({ plumbobs: updatePlumbob })
+                .eq('id', id);
+
+            if (error) {
+                throw error;
+            };
+
+            setSimmer(prevState => ({
+                ...prevState,
+                plumbobs: updatePlumbob
             }));
 
-            return videos;
         } catch (error) {
-            console.error('Error fetching latest videos:', error.message);
-            return [];
+            console.error('Error giving plumbob:', error.message);
         };
     };
 
-    useEffect(() => {
-        if (simmer.channel_id) {
-            fetchAndCompareVideos();
-        };
-    }, [simmer]);
-
-    const fetchAndCompareVideos = async () => {
-        const newVideos = await fetchLatestVideos();
-
-        if (JSON.stringify(newVideos) !== JSON.stringify(latestVideos)) {
-            setLatestVideos(newVideos);
-            setVidUpToDate(true);
-        } else {
-            setVidUpToDate(false);
-        };
-    }; 
-*/
-
     return (
         <main id="simmer-page-body">
-            {simmer?.image_type ? (
-                <div className="simmer-card-img-holder">
-                    {simmer?.image_type === "file" && (
-                        <img src={`data:image/png;base64,${simmer?.image_file}`} alt={`${simmer.simmerName} image`} className="simmer-card-img" />
-                    )}
-                    {simmer?.image_type === "url" && (
-                        <img src={simmer?.image_url} alt={`${simmer.simmerName} image`} className="simmer-card-img" />
-                    )}
-                </div>
-            ) : 
-                <div className="simmer-card-img-holder">
-                    <img src={sims_plumbob_avatar} alt={`${simmer.simmerName} image`} className="simmer-card-img" />
-                </div>
-            }
+            <section id="s-p-info-card">
+                <div className="s-p-header">
+                    {simmer?.image_type ? (
+                        <div className="simmer-card-img-holder">
+                            {simmer?.image_type === "file" && (
+                                <img src={`data:image/png;base64,${simmer?.image_file}`} alt={`${simmer.simmerName} image`} className="s-p-img" />
+                            )}
+                            {simmer?.image_type === "url" && (
+                                <img src={simmer?.image_url} alt={`${simmer.simmerName} image`} className="s-p-img" />
+                            )}
+                        </div>
+                    ) : 
+                        <div className="simmer-card-img-holder">
+                            <img src={sims_plumbob_avatar} alt={`${simmer.simmerName} image`} className="simmer-card-img" />
+                        </div>
+                    }
 
-            <h1>{simmer.simmer}</h1>
-            <div id="s-p-description">{simmer.full_description}</div>
+                    <h2 id="simmer-card-header"><Link to={`/${simmer.simmer}`} className="simmer-card-link">{simmer.simmer}</Link></h2>
+                    <p id="simmer-card-channel">see more {simmer.simmer} on
+                        {simmer.url && (
+                            <a href={simmer.url} target="_blank" rel="noopener noreferrer" id="simmer-card-url" className="simmer-card-link" title={simmer.url}> {getWebsiteName(simmer.url)}</a>
+                        )}
+                    </p>
+                </div>
 
-            {/* <div className="video-grid">
-                {latestVideos.map(video => (
-                    <div key={video.id} className="video-card">
-                        <img src={video.thumbnail} alt={video.title} />
-                        <h3>{video.title}</h3>
-                        <p>{video.description}</p>
+                <div id="simmer-card-content">
+                    
+
+                    <div id="s-c-description-holder">
+                        <h4>
+                            <span id="s-c-description-name">{simmer.simmer}</span> says: 
+                        </h4>
+                        <div id="s-c-description" className="s-p-description">{simmer.full_description}</div>
                     </div>
-                ))}
-            </div> */}
 
-            <Link to={`/${id}/${simmer.simmer}/edit-simmer`} id="simmer-card-edit-link">Edit</Link>
+                    {simmer.custom_description && (
+                        <div id="s-c-custom-description-holder">
+                            <p id="s-c-custom-description-name">a few extra words about {simmer.simmer}: </p>
+                            <p id="s-c-custom-description">{simmer.custom_description}</p>
+                        </div>
+                    )}
+                </div>
+
+                <div id="s-p-plumbobs">
+                    <p id="s-c-plumbob-description">Like this Simmer? Give them a Plumbob!</p>
+                    <p id="s-c-plumbob-holder">
+                        <span id="s-c-plumbob-count">{simmer.plumbobs}</span>
+                        <button id="plumbob-btn" onClick={() => givePlumbob(simmer.id)}>
+                            <img src={sims_plumbob} alt="the sims plumbob" id="plumbob-img" />
+                        </button>
+                    </p>
+                </div>
+            </section>
+
+            <Link to={`/${simmer.simmer}/edit-simmer`} id="simmer-card-edit-link">Edit</Link>
         </main>
     );
 };

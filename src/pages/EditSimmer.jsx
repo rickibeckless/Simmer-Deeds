@@ -7,7 +7,6 @@ import { set } from 'lodash';
 export function EditSimmer() {
 
     const { simmerName } = useParams();
-    const { id } = useParams();
     const [simmer, setSimmer] = useState('');
     const [url, setUrl] = useState('');
 
@@ -27,7 +26,7 @@ export function EditSimmer() {
             const { data, error } = await supabase
                 .from('simmers')
                 .select('*')
-                .eq('id', id)
+                .eq('simmer', simmerName)
                 .single();
 
             if (error) throw error;
@@ -70,11 +69,11 @@ export function EditSimmer() {
                         url: editedUrl
                     }
                 ])
-                .eq('id', id);
+                .eq('simmer', simmerName);
 
             if (error) throw error;
 
-            navigate(`/${id}/${editedName}`);
+            navigate(`/${editedName}`);
         } catch (error) {
             console.error('Error updating simmer: ', error.message);
         };
@@ -87,7 +86,7 @@ export function EditSimmer() {
             const { data, error } = await supabase
                 .from('simmers')
                 .delete()
-                .eq('id', id);
+                .eq('simmer', simmerName);
 
             if (error) throw error;
 
@@ -178,7 +177,7 @@ export function EditSimmer() {
                         {editedImageType === 'url' && (
                             <div className="form-input-holder">
                                 <label htmlFor="post-media-url">Enter Image URL</label>
-                                <input type="url" id="post-media-url" className="form-input-field create-post-media-img n-s-form-content" onChange={(e) => {
+                                <input type="url" id="post-media-url" value={editedImageUrl} className="form-input-field create-post-media-img n-s-form-content" onChange={(e) => {
                                     setUrl(e.target.value);
                                     setEditedImageUrl(e.target.value);
                                 }} placeholder="Image URL" />
@@ -231,7 +230,6 @@ export function EditSimmer() {
                         ></textarea>
                         <p className="n-s-form-additional">Do you have anything to add to their description?</p>
                         <label htmlFor="simmer-custom-description">Custom Description</label>
-                        
                     </div>
                 </div>
 

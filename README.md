@@ -4,7 +4,7 @@ Submitted by: **Ricki Beckless**
 
 About this web app: **Simmer Deeds is a platform that allows users to upload their favorite YouTubers who make The Sims content (Simmers). This React app utilizes Google's YouTube API to search for YouTubers by name. Users can add Simmers by manually adding their username, image, description (provided by the Simmer), and custom description (provided by the user). Users can also save time by using the Simmer Search to search for the top five YouTubers who match the provided username. Users can select one of the results, which fills out the Add Simmer form with all needed information! Also featured is the ability to give a Plumbob and 'vote' for a Simmer, view an extended version of the Simmer's information in their own custom page, and edit/delete a Simmer and their information.**
 
-Time spent: **44** hours
+Time spent: **48** hours
 
 ## Required Features
 
@@ -15,7 +15,7 @@ The following **required** functionality is completed:
 - [X] **At least five content creators are displayed on the homepage of the app**
 - [X] **Each content creator item includes their name, a link to their channel/page, and a short description of their content**
 - [X] **API calls use the async/await design pattern via Axios or fetch()**
-- [ ] **Clicking on a content creator item takes the user to their details page, which includes their name, url, and description**
+- [X] **Clicking on a content creator item takes the user to their details page, which includes their name, url, and description**
 - [X] **Each content creator has their own unique URL**
 - [X] **The user can edit a content creator to change their name, url, or description**
 - [X] **The user can delete a content creator**

@@ -60,7 +60,6 @@ export function NewSimmer() {
                 throw error;
             };
 
-            console.log('New simmer created');
             navigate('/');
         } catch (error) {
             console.error('Error creating simmer:', error.message);
@@ -70,7 +69,7 @@ export function NewSimmer() {
     const fetchYouTubeData = async (query) => {
         if (query.trim() !== '') {
             try {
-                const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel&q=${query}&fields=items(id/channelId,snippet/title,snippet/description,snippet/thumbnails/default/url,snippet/channelId)&key=${youtubeKey}`);
+                const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel&q=${query}&fields=items(id/channelId,snippet/title,snippet/description,snippet/thumbnails/high/url,snippet/channelId)&key=${youtubeKey}`);
                 const data = await response.json();
     
                 if (data.items.length > 0) {
@@ -78,12 +77,10 @@ export function NewSimmer() {
                         channelId: item.id.channelId,
                         title: item.snippet.title,
                         description: item.snippet.description,
-                        thumbnail: item.snippet.thumbnails.default.url,
+                        thumbnail: item.snippet.thumbnails.high.url,
                         url: `https://www.youtube.com/channel/${item.id.channelId}`
                     }));
     
-                    console.log(data);
-                    console.log(mappedResults);
                     setSearchResults(mappedResults);
                 } else {
                     throw new Error('No channels found');
@@ -117,10 +114,6 @@ export function NewSimmer() {
         setSimmerID(result.channelId);
         setMedia('url');
         setIsCustomSimmer(true);
-
-        console.log(result);
-        console.log("Simmer Name: ", simmerName);
-        console.log("Simmer Description: ", simmerDescription);
     };
 
     const convertFileToBase64 = (file) => {

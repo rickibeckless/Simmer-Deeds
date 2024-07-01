@@ -29,7 +29,7 @@ export function Home() {
                 throw new Error(error.message);
             };
 
-            data.forEach((simmer, index) => {
+            data.sort((a, b) => b.plumbobs - a.plumbobs).slice(0, 5).forEach((simmer, index) => {
                 setTimeout(() => {
                     setSimmer(simmer.simmer);
                 }, index * 2000);
@@ -61,8 +61,10 @@ export function Home() {
 
             <section id="home-content">
                 <div id="home-brief">
-                    <p className="n-s-form-additional">Search Results or Recently Added</p>
-
+                    {search.length > 0 ? 
+                        <p className="n-s-form-additional">Search Results for "{search}"</p>
+                        : <p className="n-s-form-additional">Recently Added</p>
+                    }
                     <section className="home-simmer-card-holder" id="home-brief-simmer-card-holder">
                         {(search.length > 0) ? 
                             <SimmerCard cardDataType="search" searchResult={search} /> : 
@@ -89,5 +91,5 @@ export function Home() {
                 </div>
             </section>
         </main>
-    )
-}
+    );
+};

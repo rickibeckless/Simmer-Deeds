@@ -6,6 +6,33 @@ import sims_plumbob_avatar from "../assets/sims_plumbob_avatar.png";
 import { EditSimmer } from "../pages/EditSimmer";
 import { debounce } from 'lodash';
 
+export const getWebsiteName = (url) => {
+    try {
+        const hostname = new URL(url).hostname;
+        let websiteName = hostname;
+
+        if (websiteName.startsWith('www.')) {
+            websiteName = websiteName.substring(4);
+        };
+
+        const parts = websiteName.split('.');
+        if (parts.length > 1) {
+            websiteName = parts.slice(0, -1).join('.');
+        };
+
+        if (websiteName === 'youtube') {
+            websiteName = 'YouTube';
+        } else {
+            websiteName = websiteName.charAt(0).toUpperCase() + websiteName.slice(1);
+        };
+
+        return websiteName;
+    } catch (error) {
+        console.error('Invalid URL:', error);
+        return null;
+    };
+};
+
 export default function SimmerCard({ cardDataType, searchResult }) {
     const [simmerName, setSimmerName] = useState([]);
     const [cardHovered, setCardHovered] = useState(false);
@@ -64,33 +91,6 @@ export default function SimmerCard({ cardDataType, searchResult }) {
         };
     };
 
-    const getWebsiteName = (url) => {
-        try {
-            const hostname = new URL(url).hostname;
-            let websiteName = hostname;
-    
-            if (websiteName.startsWith('www.')) {
-                websiteName = websiteName.substring(4);
-            };
-    
-            const parts = websiteName.split('.');
-            if (parts.length > 1) {
-                websiteName = parts.slice(0, -1).join('.');
-            };
-
-            if (websiteName === 'youtube') {
-                websiteName = 'YouTube';
-            } else {
-                websiteName = websiteName.charAt(0).toUpperCase() + websiteName.slice(1);
-            };
-    
-            return websiteName;
-        } catch (error) {
-            console.error('Invalid URL:', error);
-            return null;
-        };
-    };
-
     return (
         <>
             {simmerName.map(simmer => {
@@ -120,7 +120,7 @@ export default function SimmerCard({ cardDataType, searchResult }) {
                         }
 
                         <div id="simmer-card-content">
-                            <h2 id="simmer-card-header"><Link to={`/${simmer.id}/${simmer.simmer}`} className="simmer-card-link">{simmer.simmer}</Link></h2>
+                            <h2 id="simmer-card-header"><Link to={`/${simmer.simmer}`} className="simmer-card-link">{simmer.simmer}</Link></h2>
                             <p id="simmer-card-channel">see more {simmer.simmer} on
                                 <a href={simmer.url} target="_blank" rel="noopener noreferrer" id="simmer-card-url" className="simmer-card-link" title={simmer.url}> {getWebsiteName(simmer.url)}</a>
                             </p>
@@ -150,7 +150,7 @@ export default function SimmerCard({ cardDataType, searchResult }) {
                             </p>
                         </div>
 
-                        <Link to={`${simmer.id}/${simmer.simmer}/edit-simmer`} id="simmer-card-edit-link">Edit</Link>
+                        <Link to={`/${simmer.simmer}/edit-simmer`} id="simmer-card-edit-link">Edit</Link>
                     </div>
                 )
             })}
