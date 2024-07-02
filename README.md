@@ -37,7 +37,9 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented required features:
 
-![Simmer Deeds](https://i.ibb.co/DVfL234/Code-Path-Simmer-Deeds-Walkthrough.gif)
+<img src='./CodePathSimmerDeeds_Walkthrough.gif' title='Simmer Deeds Video Walkthrough' width='' alt='Simmer Deeds Video Walkthrough' />
+
+GIF also found at [Simmer Deeds](https://i.ibb.co/DVfL234/Code-Path-Simmer-Deeds-Walkthrough.gif) on ImgBB
 
 GIF created with [ScreenToGif](https://www.screentogif.com/) for Windows
 
