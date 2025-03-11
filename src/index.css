@@ -11,8 +11,8 @@
 }
 
 body, #root {
-    min-height: 100dvh; /* temp */
-    min-width: 100vw;
+    /* min-height: 100dvh; */          /* removed min-height & width to prevent unnecessary scroll bars (03/11/2025) */
+    /* min-width: 100vw; */
 }
 
 ::selection {

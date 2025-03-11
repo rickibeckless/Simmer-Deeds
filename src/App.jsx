@@ -22,7 +22,7 @@ export const supabase = createClient(supabaseUrl, supabaseKey);
 export const youtubeKey = import.meta.env.VITE_YOUTUBE_KEY;
 
 function App() {
-
+    const year = new Date().getFullYear();                 // get the current year (03/11/2025)
     const location = useLocation();
     const [isNewSimmerPage, setIsNewSimmerPage] = useState(location.pathname === '/new-simmer');
 
@@ -51,7 +51,7 @@ function App() {
 
             <footer id="main-footer">
                 <p id="footer-cr-statement">
-                    Copyright &copy; 2024&nbsp;
+                    Copyright &copy; {year}&nbsp;
                     <a id="footer-cr-link" href="https://github.com/rickibeckless" target="_blank" rel="nofollow noreferrer" title="GitHub: Ricki Beckless">Ricki Beckless</a>
                     . All Rights Reserved.
                 </p>
